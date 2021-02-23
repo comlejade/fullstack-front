@@ -1,32 +1,49 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div class="layui-container">
+      <form class="layui-form layui-form-pane">
+        <div class="layui-form-item">
+          <label class="layui-form-label">手机/邮箱</label>
+          <div class="layui-input-block">
+            <input type="text" name="" placeholder="请输入手机/邮箱" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label">密码</label>
+          <div class="layui-input-block">
+            <input type="password" name="" placeholder="请输入密码" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label">验证码</label>
+          <div class="layui-input-block">
+            <input type="text" name="" placeholder="请输入验证码" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+        <button type="button" class="layui-btn">点击登录</button>
+        <a class="forget-btn" href="http://www.layui.com">忘记密码？</a>
+      </form>
     </div>
-    <router-view/>
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  background: #f2f2f2;
 }
 
-#nav {
-  padding: 30px;
+.layui-container {
+  background: #ffff;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+input {
+  width: 200px;
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+.forget-btn {
+  margin-left: 10px;
+  &:hover {
+    color: #009688;
   }
 }
 </style>
