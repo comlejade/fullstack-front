@@ -12,17 +12,17 @@ const Forget = () => import(/* webpackChunkName: 'forget' */'../views/Forget.vue
 const routes = [
   {
     path: '/login',
-    name: 'Login',
+    name: 'login',
     component: Login
   },
   {
     path: '/reg',
-    name: 'Reg',
+    name: 'reg',
     component: Reg
   },
   {
     path: '/forget',
-    name: 'Forget',
+    name: 'forget',
     component: Forget
   }
 ]
