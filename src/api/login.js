@@ -1,50 +1,21 @@
-import axios from 'axios'
+import axios from '@/util/request'
 
-const getCode = async (sid) => {
-  let result = ''
-  try {
-    result = await axios.get('/public/getCaptcha', {
-      params: {
-        sid
-      }
-    })
-    if (result.status === 200) {
-      return result.data
-    }
-  } catch (error) {
-    console.log(error)
-  }
-  return result
+const getCode = (sid) => {
+  return axios.get('/public/getCaptcha', {
+    params: { sid }
+  })
 }
 
-const forget = async (options) => {
-  let result = ''
-  try {
-    result = await axios.post('/login/forget', {
-      ...options
-    })
-    if (result.status === 200) {
-      return result.data
-    }
-  } catch (error) {
-    console.log(error)
-  }
-  return result
+const forget = (options) => {
+  return axios.post('/login/forget', {
+    ...options
+  })
 }
 
-const login = async (options) => {
-  let result = ''
-  try {
-    result = await axios.post('/login/login', {
-      ...options
-    })
-    if (result.status === 200) {
-      return result.data
-    }
-  } catch (err) {
-    console.log(err)
-  }
-  return result
+const login = (options) => {
+  return axios.post('/login/login', {
+    ...options
+  })
 }
 
 export {

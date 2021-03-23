@@ -14,9 +14,9 @@
               <form method="post">
                 <div class="layui-form-item">
                   <label for="L_email" class="layui-form-label">用户名</label>
-                  <ValidationProvider rules="required|email" v-slot="{ errors }">
+                  <ValidationProvider rules="required|email" name="email" v-slot="{ errors }">
                     <div class="layui-input-inline">
-                      <input type="text" id="L_email" v-model="username" name="用户名" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                      <input type="text" id="L_email" v-model="username" placeholder="请输入用户名" autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-form-mid layui-word-aux">将会成为您唯一的登入名</div>
                     <div class="layui-form-mid error">{{ errors[0] }}</div>
@@ -24,7 +24,7 @@
                 </div>
                 <div class="layui-form-item">
                   <label for="L_nickname" class="layui-form-label">昵称</label>
-                  <ValidationProvider rules="required|min:4" name="昵称" v-slot="{ errors }">
+                  <ValidationProvider rules="required|min:4" name="name" v-slot="{ errors }">
                     <div class="layui-input-inline">
                       <input type="text" id="L_nickname" v-model="nickname" placeholder="请输入昵称" autocomplete="off" class="layui-input">
                     </div>
@@ -33,7 +33,7 @@
                 </div>
                 <div class="layui-form-item">
                   <label for="L_pass" class="layui-form-label">密码</label>
-                  <ValidationProvider rules="required|min:6|max:16" name="密码" vid="confirmation" v-slot="{ errors }">
+                  <ValidationProvider rules="required|min:6|max:16" name="password" vid="confirmation" v-slot="{ errors }">
                     <div class="layui-input-inline">
                       <input type="password" id="L_pass" v-model="password" placeholder="请输入密码" autocomplete="off" class="layui-input">
                     </div>
@@ -43,7 +43,7 @@
                 </div>
                 <div class="layui-form-item">
                   <label for="L_repass" class="layui-form-label">确认密码</label>
-                  <ValidationProvider rules="required|min:6|max:16|confirmed:confirmation" name="确认密码" v-slot="{ errors }">
+                  <ValidationProvider rules="required|min:6|max:16|confirmed:confirmation" name="password" v-slot="{ errors }">
                     <div class="layui-input-inline">
                       <input type="password" id="L_repass" v-model="password_confirm" placeholder="请再次输入密码" autocomplete="off" class="layui-input">
                     </div>
@@ -52,7 +52,7 @@
                 </div>
                 <div class="layui-form-item">
                   <label for="L_vercode" class="layui-form-label">验证码</label>
-                  <ValidationProvider rules="required|length:4" name="验证码" v-slot="{ errors }">
+                  <ValidationProvider rules="required|length:4" name="code" v-slot="{ errors }">
                     <div class="layui-input-inline">
                       <input type="text" id="L_vercode" v-model="vercode" placeholder="请输入验证码" autocomplete="off" class="layui-input">
                     </div>
