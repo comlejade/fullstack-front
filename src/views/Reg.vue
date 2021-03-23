@@ -24,18 +24,18 @@
                 </div>
                 <div class="layui-form-item">
                   <label for="L_nickname" class="layui-form-label">昵称</label>
-                  <ValidationProvider rules="required|min:4" v-slot="{ errors }">
+                  <ValidationProvider rules="required|min:4" name="昵称" v-slot="{ errors }">
                     <div class="layui-input-inline">
-                      <input type="text" id="L_nickname" v-model="nickname" name="昵称" placeholder="请输入昵称" autocomplete="off" class="layui-input">
+                      <input type="text" id="L_nickname" v-model="nickname" placeholder="请输入昵称" autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-form-mid error">{{ errors[0] }}</div>
                   </ValidationProvider>
                 </div>
                 <div class="layui-form-item">
                   <label for="L_pass" class="layui-form-label">密码</label>
-                  <ValidationProvider rules="required|min:6|max:16" vid="confirmation" v-slot="{ errors }">
+                  <ValidationProvider rules="required|min:6|max:16" name="密码" vid="confirmation" v-slot="{ errors }">
                     <div class="layui-input-inline">
-                      <input type="password" id="L_pass" v-model="password" name="密码" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                      <input type="password" id="L_pass" v-model="password" placeholder="请输入密码" autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-form-mid layui-word-aux">6到16个字符</div>
                     <div class="layui-form-mid error">{{ errors[0] }}</div>
@@ -43,18 +43,18 @@
                 </div>
                 <div class="layui-form-item">
                   <label for="L_repass" class="layui-form-label">确认密码</label>
-                  <ValidationProvider rules="required|min:6|max:16|confirmed:confirmation" v-slot="{ errors }">
+                  <ValidationProvider rules="required|min:6|max:16|confirmed:confirmation" name="确认密码" v-slot="{ errors }">
                     <div class="layui-input-inline">
-                      <input type="password" id="L_repass" v-model="password_confirm" placeholder="请再次输入密码" name="确认密码" autocomplete="off" class="layui-input">
+                      <input type="password" id="L_repass" v-model="password_confirm" placeholder="请再次输入密码" autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-form-mid error">{{ errors[0] }}</div>
                   </ValidationProvider>
                 </div>
                 <div class="layui-form-item">
                   <label for="L_vercode" class="layui-form-label">验证码</label>
-                  <ValidationProvider rules="required|length:4" v-slot="{ errors }">
+                  <ValidationProvider rules="required|length:4" name="验证码" v-slot="{ errors }">
                     <div class="layui-input-inline">
-                      <input type="text" id="L_vercode" v-model="vercode" name="验证码" placeholder="请输入验证码" autocomplete="off" class="layui-input">
+                      <input type="text" id="L_vercode" v-model="vercode" placeholder="请输入验证码" autocomplete="off" class="layui-input">
                     </div>
                     <div class="code layui-form-mid">
                       <span style="color: #c00;" @click="_getCode" v-html="svg"></span>
@@ -82,38 +82,7 @@
 
 <script>
 import { getCode } from '../api/login'
-import { ValidationProvider, extend } from 'vee-validate'
-import { required, email, min, max, confirmed, length } from 'vee-validate/dist/rules'
-
-extend('required', {
-  ...required,
-  message: '请输入{_field_}'
-})
-
-extend('email', {
-  ...email,
-  message: '请输入正确的邮箱格式'
-})
-
-extend('min', {
-  ...min,
-  message: '不符合最小长度要求'
-})
-
-extend('max', {
-  ...max,
-  message: '不符合最大长度要求'
-})
-
-extend('confirmed', {
-  ...confirmed,
-  message: '两次输入的密码不一致'
-})
-
-extend('length', {
-  ...length,
-  message: '{_field_}要求长度位{length}'
-})
+import { ValidationProvider } from 'vee-validate'
 
 export default {
   name: 'Reg',
@@ -131,8 +100,8 @@ export default {
     }
   },
   methods: {
-    _getCode () {
-      getCode().then(res => {
+    _getCode (sid) {
+      getCode(sid).then(res => {
         if (res.code === 200) {
           this.svg = res.data
         }
@@ -140,7 +109,7 @@ export default {
     }
   },
   mounted () {
-    this._getCode()
+    this._getCode('9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d')
   }
 }
 </script>

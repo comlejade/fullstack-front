@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import axios from 'axios'
+import '@/util/veevalidate-i18n'
 
 axios.defaults.baseURL = process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : ''
 

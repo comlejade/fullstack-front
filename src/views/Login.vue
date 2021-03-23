@@ -11,30 +11,30 @@
         <div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
           <div class="layui-tab-item layui-show">
             <div class="layui-form layui-form-pane">
-              <form method="post">
+              <form method="post" @submit="_login">
                 <div class="layui-form-item">
                   <label for="L_email" class="layui-form-label">用户名</label>
-                  <ValidationProvider rules="required|email" v-slot="{errors}">
+                  <ValidationProvider rules="required|email" name="email" v-slot="{errors}">
                     <div class="layui-input-inline">
-                      <input type="text" id="L_email" v-model="username" name="用户名" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                      <input type="text" id="L_email" v-model="username" placeholder="请输入用户名" autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-form-mid error">{{ errors[0] }}</div>
                   </ValidationProvider>
                 </div>
                 <div class="layui-form-item">
                   <label for="L_pass" class="layui-form-label">密码</label>
-                  <ValidationProvider rules="required|min:6" v-slot="{errors}">
+                  <ValidationProvider rules="required|min:6" name="password" v-slot="{errors}">
                     <div class="layui-input-inline">
-                      <input type="password" id="L_pass" v-model="password" name="密码" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                      <input type="password" id="L_pass" v-model="password" placeholder="请输入密码" autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-form-mid error">{{ errors[0] }}</div>
                   </ValidationProvider>
                 </div>
                 <div class="layui-form-item">
                   <label for="L_vercode" class="layui-form-label">验证码</label>
-                  <ValidationProvider rules="required|length:4" v-slot="{errors}">
+                  <ValidationProvider rules="required|length:4" name="code" v-slot="{errors}">
                     <div class="layui-input-inline">
-                      <input type="text" id="L_vercode" v-model="vercode" name="验证码" placeholder="请输入验证码" autocomplete="off" class="layui-input">
+                      <input type="text" id="L_vercode" v-model="code" placeholder="请输入验证码" autocomplete="off" class="layui-input">
                     </div>
                     <div class="code layui-form-mid">
                       <span style="color: #c00;" @click="_getCode" v-html="svg"></span>
@@ -63,29 +63,8 @@
 </template>
 
 <script>
-import { getCode } from '../api/login'
-import { ValidationProvider, extend } from 'vee-validate'
-import { required, email, min, length } from 'vee-validate/dist/rules'
-
-extend('required', {
-  ...required,
-  message: '请输入{_field_}'
-})
-
-extend('length', {
-  ...length,
-  message: '验证码要求{length}位'
-})
-
-extend('email', {
-  ...email,
-  message: '请输入正确的邮箱格式'
-})
-
-extend('min', {
-  ...min,
-  message: '请输入至少{length}位密码'
-})
+import { getCode, login } from '../api/login'
+import { ValidationProvider } from 'vee-validate'
 
 export default {
   name: 'Login',
@@ -96,21 +75,34 @@ export default {
     return {
       username: '',
       password: '',
-      vercode: '',
+      code: '',
       svg: ''
     }
   },
   methods: {
-    _getCode () {
-      getCode().then(res => {
+    _getCode (sid) {
+      getCode(sid).then(res => {
         if (res.code === 200) {
           this.svg = res.data
+        }
+      })
+    },
+    _login (e) {
+      e.preventDefault()
+      login({
+        username: this.username,
+        password: this.password,
+        code: this.code,
+        sid: '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
+      }).then(res => {
+        if (res.code === 200) {
+          console.log('登录成功')
         }
       })
     }
   },
   mounted () {
-    this._getCode()
+    this._getCode('9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d')
   }
 }
 </script>
