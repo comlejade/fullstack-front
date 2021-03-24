@@ -18,7 +18,8 @@ const i18n = new VueI18n({
       validation: {
         ...zh.messages,
         required: '请输入{_field_}',
-        email: '请输入正确的{_field_}'
+        email: '请输入正确的{_field_}',
+        confirmed: '两次输入的密码不一致'
       }
     }
   }
