@@ -1,5 +1,5 @@
 # build stage
-FROM node:14.16.0 as build-stage
+FROM node:14.16.1 as build-stage
 
 LABEL maintainer="thundersmile@126.com"
 
