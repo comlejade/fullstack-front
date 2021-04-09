@@ -5,6 +5,9 @@ import store from './store'
 import axios from 'axios'
 import '@/util/veevalidate-i18n'
 import Alert from '@/components/modules/alert'
+import dayjs from 'dayjs'
+import 'dayjs/locale/zh-cn'
+dayjs.locale('zh-cn')
 
 axios.defaults.baseURL = process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : ''
 

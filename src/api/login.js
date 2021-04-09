@@ -34,6 +34,12 @@ const login = (options) => {
   })
 }
 
+/**
+ * 注册接口
+ * @param {*} options 注册信息
+ * @returns Promise
+ */
+
 const reg = (options) => {
   return axios.post('/login/reg', {
     ...options
