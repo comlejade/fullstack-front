@@ -25,7 +25,7 @@ const routes = [
         component: Index
       },
       {
-        path: '/index/:catelog',
+        path: 'index/:catalog',
         name: 'template1',
         component: Template1
       }

@@ -25,7 +25,7 @@ class HttpRequest {
   }
 
   removePending (key, isRequest = false) {
-    console.log(key, isRequest)
+    // console.log(key, isRequest)
     // 如果if条件为true，说明对应的url已经发起请求，取消上一次请求，执行cancel方法
     if (this.pending[key] && isRequest) {
       this.pending[key]('取消重复请求')

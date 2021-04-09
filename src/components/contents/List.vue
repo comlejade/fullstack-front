@@ -39,14 +39,44 @@ export default {
       page: 0,
       limit: 20,
       catalog: '',
+      current: '',
       lists: []
     }
+  },
+  watch: {
+    current (newVal, oldVal) {
+      this.init()
+    }
+    // $route: {
+    //   handler (newVal, oldVal) {
+    //     const catalog = newVal.params.catalog
+    //     if (typeof catalog !== 'undefined' && catalog !== '') {
+    //       this.catalog = catalog
+    //     }
+    //     console.log(this.catalog)
+    //     this.init()
+    //   }
+    // }
+  },
+  beforeRouteEnter (to, from) {
+    console.log(to, from)
   },
   mounted () {
     this._getList()
   },
   methods: {
+    init () {
+      this.page = 0
+      this.lists = []
+      this.isEnd = false
+      this._getList()
+    },
     search (val) {
+      if (typeof val === 'undefined' && this.current === '') {
+        return
+      }
+      this.current = val
+      // console.log(val)
       switch (val) {
         // 未结贴
         case 0:
@@ -75,6 +105,7 @@ export default {
         default:
           this.status = ''
           this.tag = ''
+          this.current = ''
       }
     },
     _getList () {
@@ -89,7 +120,7 @@ export default {
         status: this.status
       }
       getList(options).then(res => {
-        console.log(res)
+        // console.log(res)
         // 判断lists长度是否为0,如果为0直接赋值，如果不是，就把后面请求的加入进来
         // 异常判断，res.code不是200，要有提示
 
