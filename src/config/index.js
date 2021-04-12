@@ -9,7 +9,8 @@ if (os.platform() === 'win32') {
 
 export default {
   baseUrl: {
-    dev: 'http://localhost:36742',
+    // dev: 'http://localhost:36742',
+    dev: 'http://localhost:3000',
     pro: `http://${ip}:12005`
   }
 }

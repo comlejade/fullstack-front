@@ -46,22 +46,20 @@ export default {
   watch: {
     current (newVal, oldVal) {
       this.init()
+    },
+    $route (to, from) {
+      const catalog = to.params.catalog
+      if (typeof catalog !== 'undefined' && catalog !== '') {
+        this.catalog = catalog
+      }
+      this.init()
     }
-    // $route: {
-    //   handler (newVal, oldVal) {
-    //     const catalog = newVal.params.catalog
-    //     if (typeof catalog !== 'undefined' && catalog !== '') {
-    //       this.catalog = catalog
-    //     }
-    //     console.log(this.catalog)
-    //     this.init()
-    //   }
-    // }
-  },
-  beforeRouteEnter (to, from) {
-    console.log(to, from)
   },
   mounted () {
+    const catalog = this.$route.params.catalog
+    if (typeof catalog !== 'undefined' && catalog !== '') {
+      this.catalog = catalog
+    }
     this._getList()
   },
   methods: {
