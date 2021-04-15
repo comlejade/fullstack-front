@@ -19,6 +19,7 @@ export default {
     return {
       lists: [{
         uid: {
+          pic: '/img/avatar.jpg',
           name: 'imooc',
           isVip: 1
         },
